@@ -1,0 +1,59 @@
+<!-- webpack -->
+<!-- npm install webpack webpack-cli react react-dom -->
+<!--
+	webpack
+	- 기본적으로 여러 개의 JS 모듈을 하나의 파일로 묶어내는 번들러
+	- 즉, JS로 만든 프로그램을 배포하기 좋은 형태로 묶어주는 도구
+	- webpack을 실행하면 보통은 하나의 JS 파일이 만들어짐
+	- webpack이 만든 JS 파일을 <script>에 포함해야 함!
+	- <webpack.config.js>
+	- https://www.daleseo.com/webpack-config/
+	- npx webpack --config webpack.config.js
+	- Entry
+	- 웹팩은 다른 모듈을 사용하고 있는 최상위 자바스크립트 파일이 어디에 있는지 알아야 하며, 설정 파일에서 이를 Entry 속성으로 명시합니다.
+	- 웹팩은 이 Entry 속성에 명시된 파일을 기준으로 의존성 트리를 만들어 하나의 번들 파일을 만들어 내게 됩니다.
+	- Entry 설정의 기본값은 ./src/index.js
+	- Output
+	- 웹팩이 번들링 결과를 dist/main.js 파일로 묶어내는 이유는 설정이 dist/main.js이기 때문입니다.
+	- 설정 파일의 Output 속성을 통해서 이 값을 다른 디렉터리와 파일로 변경할 수 있습니다.
+	- Lodaer
+	- 웹팩은 자바스크립트 뿐만 아니라, Loader를 이용하여 CSS나 이미지, 웹폰트, JSX, VUE 등 다양한 종류의 파일을 함께 번들링할 수 있습니다.
+	- (개인적으로 웹팩의 가장 강력한 기능이라고 생각합니다.)
+	- 먼저, 웹팩이 CSS 파일을 처리할 수 있게 만들어주는 style-loader와 css-loader 패키지를 설치합니다.
+	- npm i --D style-loader css-loader
+	- JS 파일을 임포트하듯이 CSS 파일을 임포트 합니다. 여기서 주의 사항은 반드시 style.css 앞에 ./를 붙여줘야 한다는 점입니다. 
+	- 그렇지 않으면 프로젝트 최상위 디렉터리가 아닌 node_modules 디렉터리를 뒤지기 때문입니다.
+	module.exports = {
+	entry: "./script.js",
+	output: {
+		path: __dirname,
+		filename: "build.js",
+	},
+	module: {
+		rules: [
+		{
+			test: /\.css$/,
+			use: ["style-loader", "css-loader"],
+		},
+		],
+	},
+	};
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="react-root"></div>
+	<!-- 아래 두 파일은 모듈 시스템을 이용하여 main.js 파일에 포함될 예정 -->
+	<!-- <script src="react.development.js"></script> -->
+	<!-- <script src="react-dom.development.js"></script> -->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="dist/main.js" type="text/babel"></script>
+</body>
+</html>
